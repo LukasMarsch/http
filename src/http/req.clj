@@ -1,15 +1,15 @@
 (ns http.req
   (:require clojure.string)
-  (:require logger))
+  (:require log))
 
-(def log (logger/init "seq" :debug))
+(def logger (log/init "seq" :debug))
 
 (defn req
   ([] nil)
   ([req] (let [field (clojure.string/split
                        (nth (clojure.string/split req #"\r\n") 0)
                        #" ")]
-           ((log :debug) req)
+           ((logger :debug) req)
     {
       :method (nth field 0)
       :path (nth field 1)
